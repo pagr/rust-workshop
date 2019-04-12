@@ -34,9 +34,12 @@ fn main() -> Result<(), Error> {
 
             println!("{:?}", action);
         }
-        
-        // TODO: Implement your synthesizer here
-        0.0
+        if let Some(action) = action {
+            let frequency = 440_f64 * 2_f64.powf((action as f64) / 12_f64);
+            return (time * frequency * 2_f64 * 3.1415_f64).sin();
+        } else {
+            return 0_f64;
+        }
     };
 
     audioengine.set_processor_function(Box::new(synth));
